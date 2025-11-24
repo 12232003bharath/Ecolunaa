@@ -323,4 +323,144 @@ document.addEventListener('DOMContentLoaded', () => {
             msgBox.scrollTop = msgBox.scrollHeight;
         }, 500);
     }
+    // ============================================
+    // 9 & 10. AUTHENTICATION (REGISTER + LOGIN)
+    // ============================================
+
+    // --- SELECT ELEMENTS ---
+    // We declare these ONCE here to avoid "redeclare" errors
+    const regForm = document.getElementById('regForm');
+    const loginForm = document.getElementById('loginForm');
+    const userDashboard = document.getElementById('userDashboard');
+    
+    const showRegBtn = document.getElementById('showRegister');
+    const showLoginBtn = document.getElementById('showLogin');
+    
+    const regMessage = document.getElementById('regMessage'); 
+    const loginMessage = document.getElementById('loginMessage');
+
+    // --- A. TOGGLE LOGIC (SWITCH FORMS) ---
+    if (showRegBtn && showLoginBtn) {
+        
+        // Show Register Form
+        showRegBtn.addEventListener('click', () => {
+            regForm.classList.remove('hidden');
+            loginForm.classList.add('hidden');
+            
+            // Button Styles
+            showRegBtn.style.background = 'var(--pastel-green)';
+            showRegBtn.style.color = 'white';
+            showLoginBtn.style.background = '#ddd';
+            showLoginBtn.style.color = '#555';
+            
+            // Clear messages when switching
+            if(regMessage) regMessage.textContent = '';
+            if(loginMessage) loginMessage.textContent = '';
+        });
+
+        // Show Login Form
+        showLoginBtn.addEventListener('click', () => {
+            regForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+            
+            // Button Styles
+            showLoginBtn.style.background = 'var(--pastel-green)';
+            showLoginBtn.style.color = 'white';
+            showRegBtn.style.background = '#ddd';
+            showRegBtn.style.color = '#555';
+
+            // Clear messages when switching
+            if(regMessage) regMessage.textContent = '';
+            if(loginMessage) loginMessage.textContent = '';
+        });
+    }
+
+    // --- B. REGISTRATION SUBMISSION ---
+    if (regForm) {
+        regForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('regBtn');
+            const msg = document.getElementById('regMessage'); // Reuse defined var
+            
+            // Basic Frontend Validation
+            const name = document.getElementById('regName').value;
+            const pass = document.getElementById('regPass').value;
+
+            if(name.length < 3) {
+                msg.textContent = "Name too short!"; msg.style.color = 'red'; return;
+            }
+            if(pass.length < 6) {
+                msg.textContent = "Password must be 6+ chars!"; msg.style.color = 'red'; return;
+            }
+
+            btn.textContent = "Processing...";
+            btn.disabled = true;
+
+            const formData = new FormData(regForm);
+
+            try {
+                const response = await fetch('register.php', { method: 'POST', body: formData });
+                const result = await response.json();
+                
+                msg.textContent = result.message;
+                
+                if (result.status === 'success') {
+                    msg.style.color = 'green';
+                    regForm.reset();
+                    // Optional: Switch to login tab automatically here
+                    setTimeout(() => showLoginBtn.click(), 1500); 
+                } else {
+                    msg.style.color = 'red';
+                }
+            } catch (err) {
+                msg.textContent = "Error connecting to server.";
+                msg.style.color = 'red';
+            } finally {
+                btn.textContent = "Sign Up";
+                btn.disabled = false;
+            }
+        });
+    }
+
+    // --- C. LOGIN SUBMISSION ---
+    if (loginForm) {
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('loginBtn');
+            const msg = document.getElementById('loginMessage'); // Reuse defined var
+            
+            btn.textContent = "Logging in...";
+            btn.disabled = true;
+
+            const formData = new FormData(loginForm);
+
+            try {
+                const response = await fetch('login.php', { method: 'POST', body: formData });
+                const result = await response.json();
+                
+                msg.textContent = result.message;
+                
+                if (result.status === 'success') {
+                    msg.style.color = 'green';
+                    
+                    // SUCCESS: Hide toggle buttons & forms
+                    showRegBtn.parentElement.style.display = 'none';
+                    regForm.classList.add('hidden');
+                    loginForm.classList.add('hidden');
+                    
+                    // Show Dashboard
+                    userDashboard.classList.remove('hidden');
+                    document.getElementById('displayUserName').textContent = result.user_name;
+                } else {
+                    msg.style.color = 'red';
+                }
+            } catch (err) {
+                msg.textContent = "Login failed. Check connection.";
+                msg.style.color = 'red';
+            } finally {
+                btn.textContent = "Log In";
+                btn.disabled = false;
+            }
+        });
+    }
 });
