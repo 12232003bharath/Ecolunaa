@@ -305,3 +305,96 @@ input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; 
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     z-index: 1; 
 }
+/* =========================================
+   9. REGISTRATION FORM STYLES
+   ========================================= */
+
+/* Ensure the form container doesn't get too wide on big screens */
+#join .tracker-box {
+    max-width: 450px;
+    margin: 0 auto;
+}
+
+/* Align labels to the left (inherited styles might center them) */
+#regForm label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* Remove margin from the first label so it fits tight to the top */
+#regForm label:first-of-type {
+    margin-top: 0;
+}
+
+/* Style the input fields specifically for this form if needed */
+#regForm input {
+    background: #fcfcfc;
+    border: 1px solid #ddd;
+    transition: border-color 0.3s;
+}
+
+#regForm input:focus {
+    border-color: var(--coral-pink);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+/* Style the Success/Error message area */
+#regMessage {
+    min-height: 24px; /* Keeps space so layout doesn't jump */
+    font-size: 0.9em;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    display: block;
+}
+
+/* Optional: Add a subtle background color to the message when active */
+#regMessage:not(:empty) {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+/* =========================================
+   10. LOGIN & REGISTER STYLES
+   ========================================= */
+
+/* Utility to hide elements */
+.hidden {
+    display: none !important;
+}
+
+/* Style for the Toggle Buttons Container */
+#join-community .tracker-box button.secondary-btn {
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+/* Active Toggle Button State */
+#join-community .tracker-box button.secondary-btn.active {
+    background-color: var(--pastel-green);
+    color: white;
+    border-color: var(--pastel-green);
+}
+
+/* Inactive Toggle Button Hover */
+#join-community .tracker-box button.secondary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Form Headings */
+#regForm h3, #loginForm h3 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+}
+
+/* Success Message Styling */
+#regMessage, #loginMessage {
+    min-height: 20px;
+    transition: opacity 0.3s;
+}
