@@ -248,6 +248,52 @@
             <button id="chat-send-btn"><i class="fas fa-paper-plane"></i></button>
         </div>
     </div>
+   <section id="join-community" class="content-section light-bg">
+    <div class="container" data-aos="fade-up">
+        <h2>Join the Community 🌿</h2>
+        <p class="section-subtext">Sign up to save your progress or log in to continue.</p>
+        
+        <div class="tracker-box" style="max-width: 450px;">
+            <div style="display:flex; justify-content:center; gap:20px; margin-bottom:20px;">
+                <button id="showRegister" class="btn secondary-btn" style="padding:8px 20px;">Register</button>
+                <button id="showLogin" class="btn secondary-btn" style="padding:8px 20px; background:#ddd; color:#555;">Login</button>
+            </div>
+
+            <form id="regForm">
+                <h3 style="text-align:center; color:var(--coral-pink);">Create Account</h3>
+                <label>Full Name</label>
+                <input type="text" name="full_name" id="regName" placeholder="Jane Doe" required>
+                
+                <label>Email</label>
+                <input type="email" name="email" id="regEmail" placeholder="jane@example.com" required>
+                
+                <label>Password</label>
+                <input type="password" name="password" id="regPass" placeholder="******" required>
+                
+                <button type="submit" id="regBtn" class="btn primary-btn" style="width: 100%; margin-top:20px;">Sign Up</button>
+                <p id="regMessage" style="text-align:center; margin-top:10px; font-weight:bold;"></p>
+            </form>
+
+            <form id="loginForm" class="hidden">
+                <h3 style="text-align:center; color:var(--coral-pink);">Welcome Back</h3>
+                <label>Email</label>
+                <input type="email" name="email" id="loginEmail" placeholder="jane@example.com" required>
+                
+                <label>Password</label>
+                <input type="password" name="password" id="loginPass" placeholder="******" required>
+                
+                <button type="submit" id="loginBtn" class="btn primary-btn" style="width: 100%; margin-top:20px;">Log In</button>
+                <p id="loginMessage" style="text-align:center; margin-top:10px; font-weight:bold;"></p>
+            </form>
+            
+            <div id="userDashboard" class="hidden" style="text-align:center;">
+                <h3 style="color:var(--pastel-green);">Hello, <span id="displayUserName">User</span>! 👋</h3>
+                <p>You are now logged in.</p>
+                <button onclick="location.reload()" class="btn secondary-btn">Log Out</button>
+            </div>
+        </div>
+    </div>
+</section>
 
     <footer class="footer-section">
         <p>© 2025 Ecoluna | Sustainable Periods Project.</p>
