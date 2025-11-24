@@ -1,0 +1,307 @@
+/* style.css */
+
+:root {
+    --coral-pink: #FF6B6B;
+    --blush-red: #E63946;
+    --pastel-green: #A7C957;
+    --cream-white: #F4F1DE;
+    --soft-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* --- BASE --- */
+body { font-family: 'Quicksand', sans-serif; margin: 0; padding: 0; background-color: var(--cream-white); color: #333; scroll-behavior: smooth; overflow-x: hidden; }
+.container { max-width: 1100px; margin: 0 auto; padding: 60px 20px; }
+.content-section { padding: 80px 0; text-align: center; }
+.light-bg { background-color: #fcf9f5; }
+h1, h2, h3 { font-family: 'Poppins', sans-serif; color: var(--blush-red); font-weight: 700; }
+
+/* --- BUTTONS --- */
+.btn { padding: 12px 25px; border: none; border-radius: 50px; cursor: pointer; font-weight: 600; transition: all 0.3s; margin: 10px; text-decoration: none; display: inline-block; }
+.primary-btn { background: var(--coral-pink); color: white; }
+.primary-btn:hover { background: var(--blush-red); transform: translateY(-2px); }
+.secondary-btn { background: var(--pastel-green); color: white; }
+.big-btn { font-size: 1.5em; padding: 15px 40px; }
+.pulsing { animation: pulse 0.5s ease-in-out; }
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+/* --- FLOATING PETALS --- */
+.floating-petals { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; pointer-events: none; z-index: 1; }
+.petal { position: absolute; width: 15px; height: 15px; background: var(--coral-pink); border-radius: 50%; opacity: 0; animation: fall 15s linear infinite; }
+.p1 { left: 10%; animation-delay: 2s; } .p2 { left: 40%; background: var(--pastel-green); animation-delay: 5s; } .p3 { left: 70%; animation-delay: 1s; } .p4 { left: 90%; background: var(--pastel-green); animation-delay: 8s; }
+@keyframes fall { 0% { top: -10%; opacity: 1; } 100% { top: 110%; opacity: 0; } }
+
+/* --- NAV --- */
+nav { position: fixed; top: 0; width: 100%; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; z-index: 100; transition: 0.3s; }
+nav.scrolled { background: rgba(255,255,255,0.95); box-shadow: var(--soft-shadow); }
+.nav-links { display: flex; list-style: none; gap: 20px; }
+.nav-links a { text-decoration: none; color: #555; font-weight: 600; }
+.burger-menu { display: none; font-size: 1.5em; cursor: pointer; }
+.logo { font-weight: 700; font-size: 1.5em; color: var(--blush-red); }
+
+/* --- HERO --- */
+/* --- UPDATED HERO LAYOUT --- */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 60px; /* Space for nav */
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1100px;
+    z-index: 10;
+}
+
+.hero-text {
+    flex: 1;
+    text-align: left;
+    padding-right: 40px;
+}
+
+.hero-text h1 {
+    font-size: 3.8em;
+    line-height: 1.1;
+    margin-bottom: 20px;
+    color: var(--blush-red);
+}
+
+.hero-text p {
+    font-size: 1.3em;
+    color: #555;
+    margin-bottom: 30px;
+    max-width: 500px;
+}
+
+/* --- THE UNIQUE ECO-MOON ANIMATION --- */
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ecoluna-emblem {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* The Glowing Backdrop */
+.moon-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255, 107, 107, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+    animation: pulse-glow 4s infinite ease-in-out;
+    border-radius: 50%;
+}
+
+/* The Moon Itself */
+.moon-body {
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(145deg, #c8c8c8, #b3b3b3);
+    border-radius: 50%;
+    box-shadow: 
+        -10px -10px 20px rgba(255,255,255,0.8),
+        10px 10px 20px rgba(0,0,0,0.1),
+        inset 0 0 20px rgba(255, 107, 107, 0.1);
+    position: relative;
+    z-index: 2;
+}
+
+/* Craters to make it look like a Moon */
+.crater {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 50%;
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,0.05);
+}
+.c1 { width: 40px; height: 40px; top: 30px; left: 40px; }
+.c2 { width: 20px; height: 20px; bottom: 50px; left: 60px; }
+.c3 { width: 50px; height: 50px; top: 80px; right: 30px; }
+
+/* The Leaf Orbit */
+.orbit-ring {
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border: 1px dashed rgba(167, 201, 87, 0.5); /* Pastel Green Dashes */
+    border-radius: 50%;
+    animation: spin-orbit 15s linear infinite;
+    z-index: 3;
+}
+
+.orbiting-leaf {
+    position: absolute;
+    top: -15px; /* Position on the ring */
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 30px;
+    color: var(--pastel-green);
+    background: white;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* Animations */
+@keyframes pulse-glow {
+    0% { transform: scale(0.9); opacity: 0.6; }
+    50% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.6; }
+}
+
+@keyframes spin-orbit {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Mobile Responsiveness for the New Hero */
+@media (max-width: 900px) {
+    .hero-container {
+        flex-direction: column-reverse; /* Moon goes to top on mobile */
+        text-align: center;
+    }
+    
+    .hero-text {
+        padding-right: 0;
+        text-align: center;
+        margin-top: 30px;
+    }
+    
+    .hero-text h1 {
+        font-size: 2.5em;
+    }
+    
+    .hero-text p {
+        margin: 0 auto 30px auto;
+    }
+    
+    .ecoluna-emblem {
+        width: 250px;
+        height: 250px;
+    }
+    
+    .orbit-ring {
+        width: 230px;
+        height: 230px;
+    }
+}
+
+/* --- NEW FEATURE STYLES --- */
+/* 1. Map */
+#ngoMap { height: 400px; width: 100%; border-radius: 20px; box-shadow: var(--soft-shadow); margin: 20px 0; border: 5px solid white; z-index: 10; }
+/* 2. Chart */
+#impactChart { max-height: 300px; margin-top: 20px; }
+/* 3. Calendar */
+#calendar { margin-top: 20px; background: white; padding: 15px; border-radius: 15px; box-shadow: var(--soft-shadow); }
+/* 4. 3D Model */
+.model-3d-container { height: 400px; width: 100%; border-radius: 20px; overflow: hidden; margin: 30px 0; box-shadow: var(--soft-shadow); background: white; }
+
+/* --- COMPONENTS --- */
+.stats-grid { display: flex; gap: 20px; justify-content: center; margin-top: 40px; }
+.stat-card { background: white; padding: 20px; border-radius: 15px; box-shadow: var(--soft-shadow); flex: 1; }
+.tracker-box, .calculator-box, .quiz-box, .game-box { background: white; max-width: 600px; margin: 40px auto; padding: 40px; border-radius: 20px; box-shadow: var(--soft-shadow); }
+input, select { width: 100%; padding: 12px; margin: 10px 0; border-radius: 8px; border: 1px solid #ddd; }
+.result-area { margin-top: 20px; padding-top: 20px; border-top: 1px dashed #ddd; }
+.hidden { display: none !important; }
+
+/* --- NGO TABS --- */
+.tab-controls { margin-bottom: 20px; }
+.tab-btn.active { background: var(--coral-pink); color: white; }
+.ngo-grid-wrapper { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+.ngo-card { background: white; padding: 20px; border-radius: 15px; box-shadow: var(--soft-shadow); }
+
+/* --- FAQ --- */
+.accordion-item { background: white; margin-bottom: 10px; border-radius: 10px; overflow: hidden; box-shadow: var(--soft-shadow); text-align: left; }
+.accordion-header { width: 100%; padding: 15px; background: white; border: none; text-align: left; cursor: pointer; font-weight: 600; display: flex; align-items: center; }
+.accordion-header i { margin-right: 10px; color: var(--coral-pink); }
+.accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding: 0 15px; background: #fafafa; }
+
+/* --- PLEDGE --- */
+.pledge-section { background: linear-gradient(135deg, var(--coral-pink), var(--blush-red)); color: white; }
+.pledge-section h2 { color: white; }
+#pledgeCount { font-size: 4em; font-weight: 700; display: block; }
+
+/* --- CHATBOT --- */
+.chat-launcher { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background: var(--pastel-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5em; cursor: pointer; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+.chatbot-window { position: fixed; bottom: 100px; right: 30px; width: 320px; height: 400px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); display: flex; flex-direction: column; z-index: 999; }
+.chat-header { background: var(--blush-red); color: white; padding: 15px; display: flex; justify-content: space-between; }
+.chat-messages { flex: 1; padding: 15px; overflow-y: auto; background: #f9f9f9; }
+.message { padding: 8px 12px; margin: 5px 0; border-radius: 10px; max-width: 80%; }
+.user-message { background: var(--pastel-green); color: white; margin-left: auto; }
+.bot-message { background: #eee; color: #333; }
+.chat-input-area { padding: 10px; border-top: 1px solid #eee; display: flex; }
+#chat-input { flex: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px; margin-right: 5px; }
+#chat-send-btn { background: var(--coral-pink); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; }
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .nav-links { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; width: 100%; background: white; padding: 20px; box-shadow: var(--soft-shadow); }
+    .nav-links.active { display: flex; }
+    .burger-menu { display: block; }
+    .stats-grid { flex-direction: column; }
+}
+/* Add this to your existing style.css - replacing any old 3D container styles */
+
+/* --- EARTH ANIMATION (REPLACES BROKEN IFRAME) --- */
+.earth-container {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin: 40px 0;
+    background: radial-gradient(circle, #fff 20%, #f4f1de 70%);
+}
+
+.earth {
+    font-size: 100px;
+    color: #4facfe;
+    z-index: 10;
+    animation: pulse-earth 3s infinite ease-in-out;
+}
+
+.earth-orbit {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: spin 10s linear infinite;
+}
+
+.satellite {
+    position: absolute;
+    font-size: 25px;
+    color: var(--pastel-green);
+}
+
+.s1 { top: 0; left: 50%; transform: translate(-50%, -50%); }
+.s2 { bottom: 20px; right: 20px; color: var(--coral-pink); }
+.s3 { bottom: 20px; left: 20px; color: var(--blush-red); }
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes pulse-earth { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+
+/* Rest of your CSS remains similar, just ensure .map styles are correct */
+#ngoMap {
+    height: 450px;
+    width: 100%;
+    border-radius: 20px;
+    border: 5px solid white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 1; 
+}
